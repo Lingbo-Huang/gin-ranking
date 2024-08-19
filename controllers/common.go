@@ -1,6 +1,10 @@
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"crypto/md5"
+	"encoding/hex"
+	"github.com/gin-gonic/gin"
+)
 
 /*
 把公共的文件放在controllers中
@@ -30,4 +34,13 @@ func ReturnError(c *gin.Context, code int, msg interface{}) {
 		Msg:  msg,
 	}
 	c.JSON(404, json)
+}
+
+func EncryMd5(s string) string {
+	// 初始化一个MD5哈希对象
+	ctx := md5.New()
+	// 将字符串写入ctx 对象的内部缓冲区
+	ctx.Write([]byte(s))
+	// 计算MD5哈希值, 并将结果转换为十六进制编码的字符串
+	return hex.EncodeToString(ctx.Sum(nil))
 }

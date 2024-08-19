@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"gin-ranking/models"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -12,59 +13,69 @@ import (
 */
 type UserController struct{}
 
-func (u UserController) GetUserInfo(c *gin.Context) {
-	// 通过解析请求的 URL 参数，获取用户的唯一标识符（ID）
-	idStr := c.Param("id")
-	id, _ := strconv.Atoi(idStr)
-	name := c.Param("name")
-
-	user, _ := models.GetUserTest(id)
-
-	ReturnSuccess(c, 0, name, user, 1)
-}
-
-func (u UserController) AddUser(c *gin.Context) {
+func (u UserController) Register(c *gin.Context) {
+	// 注册页面三个表单项 用户名 密码 确认密码
 	username := c.DefaultPostForm("username", "")
-	id, err := models.AddUser(username)
-	if err != nil {
-		ReturnError(c, 4002, "AddUser 保存失败")
-	} else {
-		ReturnSuccess(c, 0, "AddUser 保存成功", id, 1)
+	password := c.DefaultPostForm("password", "")
+	confirmPassword := c.DefaultPostForm("confirmPassword", "")
+
+	if username == "" || password == "" || confirmPassword == "" {
+		ReturnError(c, 4001, "请输入正确的信息")
+		return
 	}
+
+	if password != confirmPassword {
+		ReturnError(c, 4001, "两次密码不一致")
+		return
+	}
+
+	user, err := models.GetUserInfoByUsername(username)
+	if user.Id != 0 {
+		ReturnError(c, 4001, "用户名已存在")
+		return
+	}
+
+	_, err = models.AddUser(username, EncryMd5(password))
+	if err != nil {
+		ReturnError(c, 4001, "保存失败，请联系管理员")
+		return
+	}
+
+	ReturnSuccess(c, 200, "注册成功", nil, 0)
 }
 
-func (u UserController) UpdateUser(c *gin.Context) {
+// UserApi 专门定义一个结构体用来返回用户信息，不用model里的User结构体是为了防止返回的结构体里有密码
+type UserApi struct {
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+}
+
+func (u UserController) Login(c *gin.Context) {
 	username := c.DefaultPostForm("username", "")
-	idStr := c.PostForm("id")
-	id, _ := strconv.Atoi(idStr)
-	models.UpdateUser(id, username)
-	ReturnSuccess(c, 0, "UpdateUser 更新成功", id, 1)
+	password := c.DefaultPostForm("password", "")
 
-}
-
-func (u UserController) DeleteUser(c *gin.Context) {
-	idStr := c.PostForm("id")
-	id, _ := strconv.Atoi(idStr)
-	err := models.DeleteUser(id)
-	if err != nil {
-		ReturnError(c, 4003, "DeleteUser 删除失败")
-	} else {
-		ReturnSuccess(c, 0, "DeleteUser 删除成功", true, 1)
+	if username == "" || password == "" {
+		ReturnError(c, 4001, "请输入正确的信息")
+		return
 	}
-}
 
-func (u UserController) GetList(c *gin.Context) {
-	num1 := 1
-	num2 := 0
-	num3 := num1 / num2
-	ReturnError(c, 4004, num3)
-}
-
-func (u UserController) GetUserListTest(c *gin.Context) {
-	users, err := models.GetUserListTest()
-	if err != nil {
-		ReturnError(c, 4005, "GetUserListTest 获取失败")
-	} else {
-		ReturnSuccess(c, 0, "GetUserListTest 获取成功", users, 1)
+	user, _ := models.GetUserInfoByUsername(username)
+	if user.Id == 0 {
+		ReturnError(c, 4004, "用户名不存在")
+		return
 	}
+	if user.Password != EncryMd5(password) {
+		ReturnError(c, 4004, "密码错误")
+		return
+	}
+
+	session := sessions.Default(c)
+	session.Set("login:"+strconv.Itoa(user.Id), user.Id)
+	session.Save()
+
+	data := UserApi{
+		Id:       user.Id,
+		Username: user.Username,
+	}
+	ReturnSuccess(c, 0, "恭喜，登录成功", data, 1)
 }
