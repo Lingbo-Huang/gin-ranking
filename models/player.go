@@ -19,9 +19,9 @@ func (Player) TableName() string {
 	return "player"
 }
 
-func GetPlayers(aid int) ([]Player, error) {
+func GetPlayers(aid int, sort string) ([]Player, error) {
 	var players []Player
-	err := dao.Db.Where("aid =?", aid).Find(&players).Error
+	err := dao.Db.Where("aid =?", aid).Order(sort).Find(&players).Error
 	return players, err
 }
 
