@@ -1,0 +1,40 @@
+panic error time:2024-08-19 10:29:51
+runtime error: integer divide by zero
+stacktrace from panic:goroutine 19 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+gin-ranking/pkg/logger.Recover.func1()
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/pkg/logger/logger.go:132 +0x2ae
+panic({0x7c7b60?, 0xb7e320?})
+	/usr/local/go/src/runtime/panic.go:914 +0x21f
+gin-ranking/controllers.UserController.GetList({}, 0x84280f?)
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/controllers/user.go:31 +0x9
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+gin-ranking/pkg/logger.Recover(0xc000268200)
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/pkg/logger/logger.go:144 +0x62
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1(0xc000268200)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249 +0xe6
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1(0xc000268200)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/recovery.go:102 +0x7a
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1(0xc000268200)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249 +0xe6
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest(0xc000187380, 0xc000268200)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633 +0x892
+github.com/gin-gonic/gin.(*Engine).ServeHTTP(0xc000187380, {0x8f0880?, 0xc0001e0380}, 0xc000268100)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589 +0x1dd
+net/http.serverHandler.ServeHTTP({0x8ef500?}, {0x8f0880?, 0xc0001e0380?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2938 +0x8e
+net/http.(*conn).serve(0xc0001f42d0, {0x8f13a0, 0xc000263f80})
+	/usr/local/go/src/net/http/server.go:2009 +0x5f4
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3086 +0x5cb
+
