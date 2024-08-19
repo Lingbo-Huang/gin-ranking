@@ -38,3 +38,91 @@ net/http.(*conn).serve(0xc0001f42d0, {0x8f13a0, 0xc000263f80})
 created by net/http.(*Server).Serve in goroutine 1
 	/usr/local/go/src/net/http/server.go:3086 +0x5cb
 
+panic error time:2024-08-19 23:30:31
+ERR Client sent AUTH, but no password is set
+stacktrace from panic:goroutine 20 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+gin-ranking/pkg/logger.Recover.func1()
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/pkg/logger/logger.go:132 +0x2ae
+panic({0xabcec0?, 0xc000114530?})
+	/usr/local/go/src/runtime/panic.go:914 +0x21f
+gin-ranking/controllers.PlayerController.GetRanking({}, 0xc000396198?)
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/controllers/player.go:27 +0x1c7
+github.com/gin-gonic/gin.(*Context).Next(0xc000396100)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185 +0x2b
+gin-ranking/router.Router.Sessions.func1(0xc000396100)
+	/data/go/pkg/mod/github.com/gin-contrib/sessions@v1.0.1/sessions.go:54 +0x17d
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+gin-ranking/pkg/logger.Recover(0xc000396100)
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/pkg/logger/logger.go:144 +0x62
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1(0xc000396100)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249 +0xe6
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1(0xc000396100)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/recovery.go:102 +0x7a
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1(0xc000396100)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249 +0xe6
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest(0xc0001024e0, 0xc000396100)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633 +0x892
+github.com/gin-gonic/gin.(*Engine).ServeHTTP(0xc0001024e0, {0xc790f8?, 0xc00012a0e0}, 0xc000396000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589 +0x1dd
+net/http.serverHandler.ServeHTTP({0xc77948?}, {0xc790f8?, 0xc00012a0e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2938 +0x8e
+net/http.(*conn).serve(0xc000116120, {0xc7a158, 0xc000118990})
+	/usr/local/go/src/net/http/server.go:2009 +0x5f4
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3086 +0x5cb
+
+panic error time:2024-08-19 23:31:21
+ERR Client sent AUTH, but no password is set
+stacktrace from panic:goroutine 20 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+gin-ranking/pkg/logger.Recover.func1()
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/pkg/logger/logger.go:132 +0x2ae
+panic({0xabcec0?, 0xc000114490?})
+	/usr/local/go/src/runtime/panic.go:914 +0x21f
+gin-ranking/controllers.PlayerController.GetRanking({}, 0xc0003b8098?)
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/controllers/player.go:27 +0x1c7
+github.com/gin-gonic/gin.(*Context).Next(0xc0003b8000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185 +0x2b
+gin-ranking/router.Router.Sessions.func1(0xc0003b8000)
+	/data/go/pkg/mod/github.com/gin-contrib/sessions@v1.0.1/sessions.go:54 +0x17d
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+gin-ranking/pkg/logger.Recover(0xc0003b8000)
+	/mnt/d/golang/go_golandProject/hlb/gin-ranking/pkg/logger/logger.go:144 +0x62
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1(0xc0003b8000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249 +0xe6
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1(0xc0003b8000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/recovery.go:102 +0x7a
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.LoggerWithConfig.func1(0xc0003b8000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/logger.go:249 +0xe6
+github.com/gin-gonic/gin.(*Context).Next(...)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/context.go:185
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest(0xc0001024e0, 0xc0003b8000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:633 +0x892
+github.com/gin-gonic/gin.(*Engine).ServeHTTP(0xc0001024e0, {0xc790f8?, 0xc0003b2000}, 0xc000316000)
+	/data/go/pkg/mod/github.com/gin-gonic/gin@v1.10.0/gin.go:589 +0x1dd
+net/http.serverHandler.ServeHTTP({0xc77948?}, {0xc790f8?, 0xc0003b2000?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2938 +0x8e
+net/http.(*conn).serve(0xc000116120, {0xc7a158, 0xc000118990})
+	/usr/local/go/src/net/http/server.go:2009 +0x5f4
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3086 +0x5cb
+

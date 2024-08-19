@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"gin-ranking/cache"
 	"gin-ranking/models"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -41,6 +42,10 @@ func (v VoteController) AddVote(c *gin.Context) {
 	if err == nil {
 		// 如果添加成功，更新选手的score
 		models.UpdatePlayerScore(playerId)
+		// 同时更新redis，更新有序集合中某个成员的分数
+		var redisKey string
+		redisKey = "ranking:" + strconv.Itoa(player.Aid)
+		cache.Rdb.ZIncrBy(cache.Rctx, redisKey, 1, strconv.Itoa(playerId))
 		ReturnSuccess(c, 0, "投票成功", rs, 1)
 	} else {
 		ReturnError(c, 4004, "投票失败，请联系管理员")
